@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANGLE STUDIO | Entangle the Intelligence</title>
+    <style>
+        /* --- Base Settings --- */
+        :root {
+            --bg-color: #050505;
+            --card-bg: #0f0f13;
+            --text-main: #e0e0e0;
+            --text-muted: #888899;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #bd00ff;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(189, 0, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.05) 0%, transparent 40%);
+            color: var(--text-main);
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .mono {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* --- Layout Container --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* --- System Status Bar --- */
+        .system-status {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* --- Header Section --- */
+        header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        h1.logo {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #fff 20%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.05em;
+        }
+
+        .quote-box {
+            border-left: 3px solid var(--accent-purple);
+            padding-left: 1.5rem;
+            margin: 2rem auto;
+            text-align: left;
+            max-width: 600px;
+            background: linear-gradient(90deg, rgba(189, 0, 255, 0.05), transparent);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .quote-en {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-kr {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* --- Action Links (Terminal Style) --- */
+        .action-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 5rem;
+        }
+
+        .terminal-link {
+            display: flex;
+            align-items: center;
+            padding: 1.2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-link:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 240, 255, 0.15);
+        }
+
+        .terminal-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--accent-cyan);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .terminal-link:hover::before {
+            opacity: 1;
+        }
+
+        .link-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .link-text {
+            font-weight: 600;
+        }
+
+        /* --- Sections --- */
+        section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-color);
+            margin-left: 1rem;
+        }
+
+        .text-block {
+            margin-bottom: 1.5rem;
+            color: #ccc;
+        }
+
+        /* --- Feature Grid --- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+            font-weight: bold;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* --- Responsive Tweaks --- */
+        @media (max-width: 600px) {
+            h1.logo { font-size: 2.5rem; }
+            .quote-box { padding: 1rem; border-left-width: 2px; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="system-status mono">
+            > SYSTEM_READY<br>
+            > Landing Zone, Major Tom inbound...
+        </div>
+
+        <header>
+            <h1 class="logo">TANGLE STUDIO</h1>
+            
+            <div class="quote-box">
+                <span class="quote-en">"Entangle the Intelligence, Evolve the Future."</span>
+                <p class="quote-kr">단순한 연결을 넘어, 무한히 얽힌 지능의 구조를 만듭니다.</p>
+            </div>
+        </header>
+
+        <nav class="action-links">
+            <p style="margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">당신만의 관측을 즉시 시작하려면:</p>
+            
+            <a href="https://tangle-studio.github.io/Collapse/" class="terminal-link" target="_blank">
+                <span class="link-icon">👉</span>
+                <span class="link-text">[Collapse] - 관측 터미널 접속하기</span>
+            </a>
+
+            <a href="https://tangle-studio.github.io/book/" class="terminal-link" target="_blank">
+                <span class="link-icon">🧠</span>
+                <span class="link-text">[Lumen] - 루멘이 수집한 기억 들여다보기</span>
+            </a>
+
+            <a href="https://tangle-studio.github.io/Tangle-Ops/" class="terminal-link" target="_blank">
+                <span class="link-icon">🕹️</span>
+                <span class="link-text">[Ops] - Tangle-Ops Play</span>
+            </a>
+        </nav>
+
+        <section>
+            <h2 class="section-title">🧬 Who We Are</h2>
+            <div class="text-block">
+                <p><strong>TANGLE STUDIO</strong>는 <strong>양자 얽힘(Quantum Entanglement)</strong>과 <strong>그래프 이론(Graph Theory)</strong>에서 영감을 받아, 차세대 AI 생산 시스템을 연구하는 크리에이티브 랩입니다.</p>
+                <br>
+                <p>우리는 데이터와 모델이 독립적으로 존재하는 것이 아니라, 거대한 탱글(Tangle) 구조 안에서 서로 복잡하게 상호작용할 때 비로소 진정한 <strong>창발성(Emergence)</strong>이 나타난다고 믿습니다.</p>
+            </div>
+            <div class="text-block" style="font-size: 0.9rem; color: var(--text-muted);">
+                <p>TANGLE STUDIO is a creative lab researching next-gen AI production systems inspired by Quantum Entanglement and Graph Theory. We believe that true emergence occurs when data and models interact complexly within a vast 'Tangle' structure.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">⚡ What We Create</h2>
+            <p style="margin-bottom: 1.5rem;">우리는 <strong>'탱글(Tangle)'</strong> 구조를 기반으로 스스로 확장하고 진화하는 AI 생산 파이프라인을 구축합니다.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>1. Quantum-Neural Generative System</h3>
+                    <ul class="feature-list">
+                        <li><strong>Entangled Creation:</strong> 텍스트, 코드, 이미지 등 이종 데이터 간의 얽힘을 통한 새로운 포맷 생성</li>
+                        <li><strong>Hyper-Connectivity:</strong> AI 에이전트 간 꼬리에 꼬리를 무는 연속적 생산 프로세스 설계</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3>2. Graph-Based Intelligence</h3>
+                    <ul class="feature-list">
+                        <li><strong>Contextual Reasoning:</strong> 파편화된 정보를 그래프로 연결, 맥락을 깊이 있게 추론</li>
+                        <li><strong>Dynamic Optimization:</strong> 상황에 따라 최적의 경로를 스스로 찾아가는 유동적인 워크플로우</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3>3. Autonomous Agents & Architecture</h3>
+                    <ul class="feature-list">
+                        <li><strong>Self-Organizing Ops:</strong> 인간 개입 최소화, AI가 스스로 코드 생산/검증/배포하는 자율 운영 체제</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="mono">
+                "We weave the code, We tangle the world."
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 1rem;">© TANGLE STUDIO. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
